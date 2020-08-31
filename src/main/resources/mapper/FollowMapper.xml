@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.follow.dao.FollowMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.follow.domain.Follow">
+    <id column="FollowId" jdbcType="INTEGER" property="followId" />
+    <result column="FromUser" jdbcType="VARCHAR" property="fromUser" />
+    <result column="ToUser" jdbcType="VARCHAR" property="toUser" />
+    <result column="CreateTime" jdbcType="DATE" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FollowId, FromUser, ToUser, CreateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from follow
+    where FollowId = #{followId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from follow
+    where FollowId = #{followId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.follow.domain.Follow">
+    insert into follow (FollowId, FromUser, ToUser, 
+      CreateTime)
+    values (#{followId,jdbcType=INTEGER}, #{fromUser,jdbcType=VARCHAR}, #{toUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.follow.domain.Follow">
+    insert into follow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="followId != null">
+        FollowId,
+      </if>
+      <if test="fromUser != null">
+        FromUser,
+      </if>
+      <if test="toUser != null">
+        ToUser,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="followId != null">
+        #{followId,jdbcType=INTEGER},
+      </if>
+      <if test="fromUser != null">
+        #{fromUser,jdbcType=VARCHAR},
+      </if>
+      <if test="toUser != null">
+        #{toUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.follow.domain.Follow">
+    update follow
+    <set>
+      <if test="fromUser != null">
+        FromUser = #{fromUser,jdbcType=VARCHAR},
+      </if>
+      <if test="toUser != null">
+        ToUser = #{toUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=DATE},
+      </if>
+    </set>
+    where FollowId = #{followId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.follow.domain.Follow">
+    update follow
+    set FromUser = #{fromUser,jdbcType=VARCHAR},
+      ToUser = #{toUser,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=DATE}
+    where FollowId = #{followId,jdbcType=INTEGER}
+  </update>
+</mapper>

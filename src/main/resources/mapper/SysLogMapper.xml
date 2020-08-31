@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.syslog.dao.SysLogMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.syslog.domain.SysLog">
+    <id column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="BusinessType" jdbcType="INTEGER" property="businessType" />
+    <result column="Method" jdbcType="VARCHAR" property="method" />
+    <result column="OperName" jdbcType="VARCHAR" property="operName" />
+    <result column="OperUrl" jdbcType="VARCHAR" property="operUrl" />
+    <result column="Ip" jdbcType="VARCHAR" property="ip" />
+    <result column="OperParam" jdbcType="VARCHAR" property="operParam" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+    <result column="ErrorMsg" jdbcType="VARCHAR" property="errorMsg" />
+    <result column="OperTime" jdbcType="DATE" property="operTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Title, BusinessType, Method, OperName, OperUrl, Ip, OperParam, Status, ErrorMsg, 
+    OperTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from syslog
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from syslog
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.syslog.domain.SysLog">
+    insert into syslog (Id, Title, BusinessType, 
+      Method, OperName, OperUrl, 
+      Ip, OperParam, Status, 
+      ErrorMsg, OperTime)
+    values (#{id,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{businessType,jdbcType=INTEGER}, 
+      #{method,jdbcType=VARCHAR}, #{operName,jdbcType=VARCHAR}, #{operUrl,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{operParam,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{errorMsg,jdbcType=VARCHAR}, #{operTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.syslog.domain.SysLog">
+    insert into syslog
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="title != null">
+        Title,
+      </if>
+      <if test="businessType != null">
+        BusinessType,
+      </if>
+      <if test="method != null">
+        Method,
+      </if>
+      <if test="operName != null">
+        OperName,
+      </if>
+      <if test="operUrl != null">
+        OperUrl,
+      </if>
+      <if test="ip != null">
+        Ip,
+      </if>
+      <if test="operParam != null">
+        OperParam,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="errorMsg != null">
+        ErrorMsg,
+      </if>
+      <if test="operTime != null">
+        OperTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null">
+        #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operName != null">
+        #{operName,jdbcType=VARCHAR},
+      </if>
+      <if test="operUrl != null">
+        #{operUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operParam != null">
+        #{operParam,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="errorMsg != null">
+        #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        #{operTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.syslog.domain.SysLog">
+    update syslog
+    <set>
+      <if test="title != null">
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="businessType != null">
+        BusinessType = #{businessType,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        Method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="operName != null">
+        OperName = #{operName,jdbcType=VARCHAR},
+      </if>
+      <if test="operUrl != null">
+        OperUrl = #{operUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        Ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="operParam != null">
+        OperParam = #{operParam,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="errorMsg != null">
+        ErrorMsg = #{errorMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="operTime != null">
+        OperTime = #{operTime,jdbcType=DATE},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.syslog.domain.SysLog">
+    update syslog
+    set Title = #{title,jdbcType=VARCHAR},
+      BusinessType = #{businessType,jdbcType=INTEGER},
+      Method = #{method,jdbcType=VARCHAR},
+      OperName = #{operName,jdbcType=VARCHAR},
+      OperUrl = #{operUrl,jdbcType=VARCHAR},
+      Ip = #{ip,jdbcType=VARCHAR},
+      OperParam = #{operParam,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      ErrorMsg = #{errorMsg,jdbcType=VARCHAR},
+      OperTime = #{operTime,jdbcType=DATE}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

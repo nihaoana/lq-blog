@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.notice.dao.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.notice.domain.Notice">
+    <id column="Id" jdbcType="INTEGER" property="id" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="UserId" jdbcType="VARCHAR" property="userId" />
+    <result column="State" jdbcType="INTEGER" property="state" />
+    <result column="CreateTime" jdbcType="DATE" property="createTime" />
+    <result column="IsCancel" jdbcType="BIT" property="isCancel" />
+    <result column="CancelTime" jdbcType="DATE" property="cancelTime" />
+    <result column="IsDelete" jdbcType="BIT" property="isDelete" />
+    <result column="Priority" jdbcType="INTEGER" property="priority" />
+    <result column="Type" jdbcType="INTEGER" property="type" />
+    <result column="UserType" jdbcType="INTEGER" property="userType" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.qiangesoft.notice.domain.Notice">
+    <result column="Content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, Title, UserId, State, CreateTime, IsCancel, CancelTime, IsDelete, Priority, Type, 
+    UserType
+  </sql>
+  <sql id="Blob_Column_List">
+    Content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice
+    where Id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notice
+    where Id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.notice.domain.Notice">
+    insert into notice (Id, Title, UserId, 
+      State, CreateTime, IsCancel, 
+      CancelTime, IsDelete, Priority, 
+      Type, UserType, Content
+      )
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{state,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{isCancel,jdbcType=BIT}, 
+      #{cancelTime,jdbcType=DATE}, #{isDelete,jdbcType=BIT}, #{priority,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{userType,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.notice.domain.Notice">
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="title != null">
+        Title,
+      </if>
+      <if test="userId != null">
+        UserId,
+      </if>
+      <if test="state != null">
+        State,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="isCancel != null">
+        IsCancel,
+      </if>
+      <if test="cancelTime != null">
+        CancelTime,
+      </if>
+      <if test="isDelete != null">
+        IsDelete,
+      </if>
+      <if test="priority != null">
+        Priority,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="userType != null">
+        UserType,
+      </if>
+      <if test="content != null">
+        Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="isCancel != null">
+        #{isCancel,jdbcType=BIT},
+      </if>
+      <if test="cancelTime != null">
+        #{cancelTime,jdbcType=DATE},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.notice.domain.Notice">
+    update notice
+    <set>
+      <if test="title != null">
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        UserId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        State = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="isCancel != null">
+        IsCancel = #{isCancel,jdbcType=BIT},
+      </if>
+      <if test="cancelTime != null">
+        CancelTime = #{cancelTime,jdbcType=DATE},
+      </if>
+      <if test="isDelete != null">
+        IsDelete = #{isDelete,jdbcType=BIT},
+      </if>
+      <if test="priority != null">
+        Priority = #{priority,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        Type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="userType != null">
+        UserType = #{userType,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        Content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiangesoft.notice.domain.Notice">
+    update notice
+    set Title = #{title,jdbcType=VARCHAR},
+      UserId = #{userId,jdbcType=VARCHAR},
+      State = #{state,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=DATE},
+      IsCancel = #{isCancel,jdbcType=BIT},
+      CancelTime = #{cancelTime,jdbcType=DATE},
+      IsDelete = #{isDelete,jdbcType=BIT},
+      Priority = #{priority,jdbcType=INTEGER},
+      Type = #{type,jdbcType=INTEGER},
+      UserType = #{userType,jdbcType=INTEGER},
+      Content = #{content,jdbcType=LONGVARCHAR}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.notice.domain.Notice">
+    update notice
+    set Title = #{title,jdbcType=VARCHAR},
+      UserId = #{userId,jdbcType=VARCHAR},
+      State = #{state,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=DATE},
+      IsCancel = #{isCancel,jdbcType=BIT},
+      CancelTime = #{cancelTime,jdbcType=DATE},
+      IsDelete = #{isDelete,jdbcType=BIT},
+      Priority = #{priority,jdbcType=INTEGER},
+      Type = #{type,jdbcType=INTEGER},
+      UserType = #{userType,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

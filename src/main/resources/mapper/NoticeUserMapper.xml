@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.notice.dao.NoticeUserMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.notice.domain.NoticeUser">
+    <id column="Id" jdbcType="VARCHAR" property="id" />
+    <result column="NoticeId" jdbcType="VARCHAR" property="noticeId" />
+    <result column="UserId" jdbcType="VARCHAR" property="userId" />
+    <result column="IsRead" jdbcType="INTEGER" property="isRead" />
+    <result column="ReadTime" jdbcType="DATE" property="readTime" />
+    <result column="UserType" jdbcType="INTEGER" property="userType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, NoticeId, UserId, IsRead, ReadTime, UserType
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from noticeuser
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from noticeuser
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.notice.domain.NoticeUser">
+    insert into noticeuser (Id, NoticeId, UserId, 
+      IsRead, ReadTime, UserType
+      )
+    values (#{id,jdbcType=VARCHAR}, #{noticeId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{isRead,jdbcType=INTEGER}, #{readTime,jdbcType=DATE}, #{userType,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.notice.domain.NoticeUser">
+    insert into noticeuser
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="noticeId != null">
+        NoticeId,
+      </if>
+      <if test="userId != null">
+        UserId,
+      </if>
+      <if test="isRead != null">
+        IsRead,
+      </if>
+      <if test="readTime != null">
+        ReadTime,
+      </if>
+      <if test="userType != null">
+        UserType,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeId != null">
+        #{noticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null">
+        #{isRead,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null">
+        #{readTime,jdbcType=DATE},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.notice.domain.NoticeUser">
+    update noticeuser
+    <set>
+      <if test="noticeId != null">
+        NoticeId = #{noticeId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        UserId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="isRead != null">
+        IsRead = #{isRead,jdbcType=INTEGER},
+      </if>
+      <if test="readTime != null">
+        ReadTime = #{readTime,jdbcType=DATE},
+      </if>
+      <if test="userType != null">
+        UserType = #{userType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.notice.domain.NoticeUser">
+    update noticeuser
+    set NoticeId = #{noticeId,jdbcType=VARCHAR},
+      UserId = #{userId,jdbcType=VARCHAR},
+      IsRead = #{isRead,jdbcType=INTEGER},
+      ReadTime = #{readTime,jdbcType=DATE},
+      UserType = #{userType,jdbcType=INTEGER}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

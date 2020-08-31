@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.collect.dao.CollectMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.collect.domain.Collect">
+    <id column="CollectId" jdbcType="VARCHAR" property="collectId" />
+    <result column="UserId" jdbcType="VARCHAR" property="userId" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Content" jdbcType="VARCHAR" property="content" />
+    <result column="Param" jdbcType="VARCHAR" property="param" />
+    <result column="Url" jdbcType="VARCHAR" property="url" />
+    <result column="IsDelete" jdbcType="INTEGER" property="isDelete" />
+    <result column="CreateTime" jdbcType="DATE" property="createTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CollectId, UserId, Name, Content, Param, Url, IsDelete, CreateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from collect
+    where CollectId = #{collectId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from collect
+    where CollectId = #{collectId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.collect.domain.Collect">
+    insert into collect (CollectId, UserId, Name, 
+      Content, Param, Url, 
+      IsDelete, CreateTime)
+    values (#{collectId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR}, #{param,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{isDelete,jdbcType=INTEGER}, #{createTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.collect.domain.Collect">
+    insert into collect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="collectId != null">
+        CollectId,
+      </if>
+      <if test="userId != null">
+        UserId,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="content != null">
+        Content,
+      </if>
+      <if test="param != null">
+        Param,
+      </if>
+      <if test="url != null">
+        Url,
+      </if>
+      <if test="isDelete != null">
+        IsDelete,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="collectId != null">
+        #{collectId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null">
+        #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.collect.domain.Collect">
+    update collect
+    <set>
+      <if test="userId != null">
+        UserId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        Content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null">
+        Param = #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        Url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        IsDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=DATE},
+      </if>
+    </set>
+    where CollectId = #{collectId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.collect.domain.Collect">
+    update collect
+    set UserId = #{userId,jdbcType=VARCHAR},
+      Name = #{name,jdbcType=VARCHAR},
+      Content = #{content,jdbcType=VARCHAR},
+      Param = #{param,jdbcType=VARCHAR},
+      Url = #{url,jdbcType=VARCHAR},
+      IsDelete = #{isDelete,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=DATE}
+    where CollectId = #{collectId,jdbcType=VARCHAR}
+  </update>
+</mapper>

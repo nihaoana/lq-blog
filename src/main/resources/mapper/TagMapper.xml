@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.tag.dao.TagMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.tag.domain.Tag">
+    <id column="TagId" jdbcType="INTEGER" property="tagId" />
+    <result column="TagName" jdbcType="VARCHAR" property="tagName" />
+    <result column="Description" jdbcType="VARCHAR" property="description" />
+    <result column="IsRecommend" jdbcType="INTEGER" property="isRecommend" />
+    <result column="IsDelete" jdbcType="INTEGER" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    TagId, TagName, Description, IsRecommend, IsDelete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tag
+    where TagId = #{tagId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tag
+    where TagId = #{tagId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.tag.domain.Tag">
+    insert into tag (TagId, TagName, Description, 
+      IsRecommend, IsDelete)
+    values (#{tagId,jdbcType=INTEGER}, #{tagName,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{isRecommend,jdbcType=INTEGER}, #{isDelete,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.tag.domain.Tag">
+    insert into tag
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tagId != null">
+        TagId,
+      </if>
+      <if test="tagName != null">
+        TagName,
+      </if>
+      <if test="description != null">
+        Description,
+      </if>
+      <if test="isRecommend != null">
+        IsRecommend,
+      </if>
+      <if test="isDelete != null">
+        IsDelete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tagId != null">
+        #{tagId,jdbcType=INTEGER},
+      </if>
+      <if test="tagName != null">
+        #{tagName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isRecommend != null">
+        #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.tag.domain.Tag">
+    update tag
+    <set>
+      <if test="tagName != null">
+        TagName = #{tagName,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        Description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="isRecommend != null">
+        IsRecommend = #{isRecommend,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null">
+        IsDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+    </set>
+    where TagId = #{tagId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.tag.domain.Tag">
+    update tag
+    set TagName = #{tagName,jdbcType=VARCHAR},
+      Description = #{description,jdbcType=VARCHAR},
+      IsRecommend = #{isRecommend,jdbcType=INTEGER},
+      IsDelete = #{isDelete,jdbcType=INTEGER}
+    where TagId = #{tagId,jdbcType=INTEGER}
+  </update>
+</mapper>

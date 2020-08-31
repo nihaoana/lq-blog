@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.comment.dao.CommentMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.comment.domain.Comment">
+    <id column="CommentId" jdbcType="VARCHAR" property="commentId" />
+    <result column="ArtId" jdbcType="VARCHAR" property="artId" />
+    <result column="ReplyId" jdbcType="VARCHAR" property="replyId" />
+    <result column="CommentUserId" jdbcType="VARCHAR" property="commentUserId" />
+    <result column="ReplyUserId" jdbcType="VARCHAR" property="replyUserId" />
+    <result column="Content" jdbcType="VARCHAR" property="content" />
+    <result column="GoodNum" jdbcType="INTEGER" property="goodNum" />
+    <result column="CreateTime" jdbcType="DATE" property="createTime" />
+    <result column="UpdateTime" jdbcType="DATE" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    CommentId, ArtId, ReplyId, CommentUserId, ReplyUserId, Content, GoodNum, CreateTime, 
+    UpdateTime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from comment
+    where CommentId = #{commentId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from comment
+    where CommentId = #{commentId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.comment.domain.Comment">
+    insert into comment (CommentId, ArtId, ReplyId, 
+      CommentUserId, ReplyUserId, Content, 
+      GoodNum, CreateTime, UpdateTime
+      )
+    values (#{commentId,jdbcType=VARCHAR}, #{artId,jdbcType=VARCHAR}, #{replyId,jdbcType=VARCHAR}, 
+      #{commentUserId,jdbcType=VARCHAR}, #{replyUserId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{goodNum,jdbcType=INTEGER}, #{createTime,jdbcType=DATE}, #{updateTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.comment.domain.Comment">
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        CommentId,
+      </if>
+      <if test="artId != null">
+        ArtId,
+      </if>
+      <if test="replyId != null">
+        ReplyId,
+      </if>
+      <if test="commentUserId != null">
+        CommentUserId,
+      </if>
+      <if test="replyUserId != null">
+        ReplyUserId,
+      </if>
+      <if test="content != null">
+        Content,
+      </if>
+      <if test="goodNum != null">
+        GoodNum,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="commentId != null">
+        #{commentId,jdbcType=VARCHAR},
+      </if>
+      <if test="artId != null">
+        #{artId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyId != null">
+        #{replyId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentUserId != null">
+        #{commentUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUserId != null">
+        #{replyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNum != null">
+        #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.comment.domain.Comment">
+    update comment
+    <set>
+      <if test="artId != null">
+        ArtId = #{artId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyId != null">
+        ReplyId = #{replyId,jdbcType=VARCHAR},
+      </if>
+      <if test="commentUserId != null">
+        CommentUserId = #{commentUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="replyUserId != null">
+        ReplyUserId = #{replyUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        Content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="goodNum != null">
+        GoodNum = #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=DATE},
+      </if>
+    </set>
+    where CommentId = #{commentId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.comment.domain.Comment">
+    update comment
+    set ArtId = #{artId,jdbcType=VARCHAR},
+      ReplyId = #{replyId,jdbcType=VARCHAR},
+      CommentUserId = #{commentUserId,jdbcType=VARCHAR},
+      ReplyUserId = #{replyUserId,jdbcType=VARCHAR},
+      Content = #{content,jdbcType=VARCHAR},
+      GoodNum = #{goodNum,jdbcType=INTEGER},
+      CreateTime = #{createTime,jdbcType=DATE},
+      UpdateTime = #{updateTime,jdbcType=DATE}
+    where CommentId = #{commentId,jdbcType=VARCHAR}
+  </update>
+</mapper>

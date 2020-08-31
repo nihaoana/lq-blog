@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.accessory.dao.AccessoryMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.accessory.domain.Accessory">
+    <id column="FileId" jdbcType="VARCHAR" property="fileId" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Path" jdbcType="VARCHAR" property="path" />
+    <result column="Type" jdbcType="VARCHAR" property="type" />
+    <result column="FileSize" jdbcType="DOUBLE" property="fileSize" />
+    <result column="IsFree" jdbcType="BIT" property="isFree" />
+    <result column="CreateTime" jdbcType="DATE" property="createTime" />
+    <result column="IsDelete" jdbcType="INTEGER" property="isDelete" />
+    <result column="Summary" jdbcType="VARCHAR" property="summary" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    FileId, Name, Path, Type, FileSize, IsFree, CreateTime, IsDelete, Summary
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from accessory
+    where FileId = #{fileId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from accessory
+    where FileId = #{fileId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.accessory.domain.Accessory">
+    insert into accessory (FileId, Name, Path, 
+      Type, FileSize, IsFree, 
+      CreateTime, IsDelete, Summary
+      )
+    values (#{fileId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{fileSize,jdbcType=DOUBLE}, #{isFree,jdbcType=BIT}, 
+      #{createTime,jdbcType=DATE}, #{isDelete,jdbcType=INTEGER}, #{summary,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.accessory.domain.Accessory">
+    insert into accessory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        FileId,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="path != null">
+        Path,
+      </if>
+      <if test="type != null">
+        Type,
+      </if>
+      <if test="fileSize != null">
+        FileSize,
+      </if>
+      <if test="isFree != null">
+        IsFree,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="isDelete != null">
+        IsDelete,
+      </if>
+      <if test="summary != null">
+        Summary,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="fileId != null">
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        #{fileSize,jdbcType=DOUBLE},
+      </if>
+      <if test="isFree != null">
+        #{isFree,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        #{summary,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.accessory.domain.Accessory">
+    update accessory
+    <set>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null">
+        Path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null">
+        FileSize = #{fileSize,jdbcType=DOUBLE},
+      </if>
+      <if test="isFree != null">
+        IsFree = #{isFree,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="isDelete != null">
+        IsDelete = #{isDelete,jdbcType=INTEGER},
+      </if>
+      <if test="summary != null">
+        Summary = #{summary,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where FileId = #{fileId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.accessory.domain.Accessory">
+    update accessory
+    set Name = #{name,jdbcType=VARCHAR},
+      Path = #{path,jdbcType=VARCHAR},
+      Type = #{type,jdbcType=VARCHAR},
+      FileSize = #{fileSize,jdbcType=DOUBLE},
+      IsFree = #{isFree,jdbcType=BIT},
+      CreateTime = #{createTime,jdbcType=DATE},
+      IsDelete = #{isDelete,jdbcType=INTEGER},
+      Summary = #{summary,jdbcType=VARCHAR}
+    where FileId = #{fileId,jdbcType=VARCHAR}
+  </update>
+</mapper>

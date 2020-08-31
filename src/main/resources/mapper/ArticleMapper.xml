@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qiangesoft.article.dao.ArticleMapper">
+  <resultMap id="BaseResultMap" type="com.qiangesoft.article.domain.Article">
+    <id column="ArtId" jdbcType="VARCHAR" property="artId" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+    <result column="Title" jdbcType="VARCHAR" property="title" />
+    <result column="CategoryId" jdbcType="INTEGER" property="categoryId" />
+    <result column="Tags" jdbcType="VARCHAR" property="tags" />
+    <result column="UserId" jdbcType="VARCHAR" property="userId" />
+    <result column="CreateTime" jdbcType="DATE" property="createTime" />
+    <result column="ModifyTime" jdbcType="DATE" property="modifyTime" />
+    <result column="ReadNum" jdbcType="INTEGER" property="readNum" />
+    <result column="CommentNum" jdbcType="INTEGER" property="commentNum" />
+    <result column="CollectionNum" jdbcType="INTEGER" property="collectionNum" />
+    <result column="GoodNum" jdbcType="INTEGER" property="goodNum" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.qiangesoft.article.domain.Article">
+    <result column="Content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ArtId, Status, Title, CategoryId, Tags, UserId, CreateTime, ModifyTime, ReadNum, 
+    CommentNum, CollectionNum, GoodNum
+  </sql>
+  <sql id="Blob_Column_List">
+    Content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from article
+    where ArtId = #{artId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from article
+    where ArtId = #{artId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiangesoft.article.domain.Article">
+    insert into article (ArtId, Status, Title, 
+      CategoryId, Tags, UserId, 
+      CreateTime, ModifyTime, ReadNum, 
+      CommentNum, CollectionNum, GoodNum, 
+      Content)
+    values (#{artId,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
+      #{categoryId,jdbcType=INTEGER}, #{tags,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=DATE}, #{modifyTime,jdbcType=DATE}, #{readNum,jdbcType=INTEGER}, 
+      #{commentNum,jdbcType=INTEGER}, #{collectionNum,jdbcType=INTEGER}, #{goodNum,jdbcType=INTEGER}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiangesoft.article.domain.Article">
+    insert into article
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="artId != null">
+        ArtId,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="title != null">
+        Title,
+      </if>
+      <if test="categoryId != null">
+        CategoryId,
+      </if>
+      <if test="tags != null">
+        Tags,
+      </if>
+      <if test="userId != null">
+        UserId,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime,
+      </if>
+      <if test="readNum != null">
+        ReadNum,
+      </if>
+      <if test="commentNum != null">
+        CommentNum,
+      </if>
+      <if test="collectionNum != null">
+        CollectionNum,
+      </if>
+      <if test="goodNum != null">
+        GoodNum,
+      </if>
+      <if test="content != null">
+        Content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="artId != null">
+        #{artId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="tags != null">
+        #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null">
+        #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="readNum != null">
+        #{readNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="collectionNum != null">
+        #{collectionNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodNum != null">
+        #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiangesoft.article.domain.Article">
+    update article
+    <set>
+      <if test="status != null">
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="title != null">
+        Title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="categoryId != null">
+        CategoryId = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="tags != null">
+        Tags = #{tags,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        UserId = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="modifyTime != null">
+        ModifyTime = #{modifyTime,jdbcType=DATE},
+      </if>
+      <if test="readNum != null">
+        ReadNum = #{readNum,jdbcType=INTEGER},
+      </if>
+      <if test="commentNum != null">
+        CommentNum = #{commentNum,jdbcType=INTEGER},
+      </if>
+      <if test="collectionNum != null">
+        CollectionNum = #{collectionNum,jdbcType=INTEGER},
+      </if>
+      <if test="goodNum != null">
+        GoodNum = #{goodNum,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        Content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ArtId = #{artId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiangesoft.article.domain.Article">
+    update article
+    set Status = #{status,jdbcType=INTEGER},
+      Title = #{title,jdbcType=VARCHAR},
+      CategoryId = #{categoryId,jdbcType=INTEGER},
+      Tags = #{tags,jdbcType=VARCHAR},
+      UserId = #{userId,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=DATE},
+      ModifyTime = #{modifyTime,jdbcType=DATE},
+      ReadNum = #{readNum,jdbcType=INTEGER},
+      CommentNum = #{commentNum,jdbcType=INTEGER},
+      CollectionNum = #{collectionNum,jdbcType=INTEGER},
+      GoodNum = #{goodNum,jdbcType=INTEGER},
+      Content = #{content,jdbcType=LONGVARCHAR}
+    where ArtId = #{artId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiangesoft.article.domain.Article">
+    update article
+    set Status = #{status,jdbcType=INTEGER},
+      Title = #{title,jdbcType=VARCHAR},
+      CategoryId = #{categoryId,jdbcType=INTEGER},
+      Tags = #{tags,jdbcType=VARCHAR},
+      UserId = #{userId,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=DATE},
+      ModifyTime = #{modifyTime,jdbcType=DATE},
+      ReadNum = #{readNum,jdbcType=INTEGER},
+      CommentNum = #{commentNum,jdbcType=INTEGER},
+      CollectionNum = #{collectionNum,jdbcType=INTEGER},
+      GoodNum = #{goodNum,jdbcType=INTEGER}
+    where ArtId = #{artId,jdbcType=VARCHAR}
+  </update>
+</mapper>
