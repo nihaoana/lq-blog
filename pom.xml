@@ -19,7 +19,6 @@
     </properties>
 
     <dependencies>
-
         <!--权限系统-->
         <dependency>
             <groupId>com.qiangesoft</groupId>
