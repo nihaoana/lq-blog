@@ -34,7 +34,7 @@ public class TestController {
         try {
             StringBuffer verificationCodeText = new StringBuffer();
             //加入到session方便后面验证
-            request.getSession().setAttribute("captcha",verificationCodeText);
+            request.getSession().setAttribute("captcha",verificationCodeText.toString());
             BufferedImage image = captchaUtil.genRandomCodeImage(verificationCodeText);
             ImageIO.write(image,"jpg",outputStream);
             captchaChallengeAsJpeg = outputStream.toByteArray();
